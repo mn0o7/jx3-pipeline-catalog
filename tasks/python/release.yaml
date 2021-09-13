@@ -71,6 +71,8 @@ spec:
           script: |
             #!/usr/bin/env sh
             source .jx/variables.sh
+            #if REPO_NAME has underscores change them to dashes
+            export REPO_NAME=$(echo $REPO_NAME  | tr '_' '-')
 
             if [ -d "charts/$REPO_NAME" ]; then
             jx gitops yset -p version -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
